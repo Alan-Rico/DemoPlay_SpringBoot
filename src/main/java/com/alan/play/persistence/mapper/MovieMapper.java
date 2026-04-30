@@ -2,6 +2,7 @@ package com.alan.play.persistence.mapper;
 
 import com.alan.play.domain.dto.MovieDto;
 import com.alan.play.persistence.entity.MovieEntity;
+import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
@@ -17,5 +18,9 @@ public interface MovieMapper {
     @Mapping(source = "clasificacion", target = "rating")
     MovieDto toDto(MovieEntity entity);
     List<MovieDto> toDtos(Iterable<MovieEntity> entities);
+
+    @InheritInverseConfiguration
+    @Mapping(source = "genre", target = "genero", qualifiedByName = "genreToString")
+    MovieEntity toEntity(MovieDto dto);
 
 }

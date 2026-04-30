@@ -2,7 +2,9 @@ package com.alan.play.domain.service;
 
 import com.alan.play.domain.dto.MovieDto;
 import com.alan.play.domain.repository.MovieRepository;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 
@@ -20,5 +22,9 @@ public class MovieService {
 
     public MovieDto getById(long id) {
         return  this.movieRepository.getById(id);
+    }
+
+    public MovieDto add(MovieDto movieDto) {
+        return this.movieRepository.save(movieDto);
     }
 }
