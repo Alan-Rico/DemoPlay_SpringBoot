@@ -1,6 +1,7 @@
 package com.alan.play.web.controller;
 
 import com.alan.play.domain.dto.MovieDto;
+import com.alan.play.domain.dto.UpdateMovieDto;
 import com.alan.play.domain.service.MovieService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -35,5 +36,9 @@ public class MovieController {
     public ResponseEntity<MovieDto> add (@RequestBody MovieDto movieDto){
         MovieDto movieDtoResponse = this.movieService.add(movieDto);
         return ResponseEntity.status(HttpStatus.CREATED).body(movieDtoResponse);
+    }
+    @PutMapping("/{id}")
+    public ResponseEntity<MovieDto> update(@PathVariable long id, @RequestBody UpdateMovieDto updateMovieDto){
+        return ResponseEntity.ok(this.movieService.update(id, updateMovieDto));
     }
 }

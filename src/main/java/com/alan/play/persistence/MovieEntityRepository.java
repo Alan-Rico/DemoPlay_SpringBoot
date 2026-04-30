@@ -1,13 +1,18 @@
 package com.alan.play.persistence;
 
 import com.alan.play.domain.dto.MovieDto;
+import com.alan.play.domain.dto.UpdateMovieDto;
 import com.alan.play.domain.repository.MovieRepository;
 import com.alan.play.persistence.crud.CrudMovieEntity;
 import com.alan.play.persistence.entity.MovieEntity;
 import com.alan.play.persistence.mapper.MovieMapper;
 import org.springframework.stereotype.Repository;
 
+import java.math.BigDecimal;
 import java.util.List;
+
+import static org.springframework.data.jpa.domain.AbstractPersistable_.id;
+
 @Repository
 public class MovieEntityRepository implements MovieRepository {
     private final CrudMovieEntity crudMovieEntity;
@@ -33,6 +38,14 @@ public class MovieEntityRepository implements MovieRepository {
     public MovieDto save(MovieDto movieDto) {
         MovieEntity movieEntity = this.movieMapper.toEntity(movieDto);
         movieEntity.setEstado("D");
+        return this.movieMapper.toDto(this.crudMovieEntity.save(movieEntity));
+    }
+
+    @Override
+    public MovieDto update(long id, UpdateMovieDto updateMovieDto) {
+        MovieEntity movieEntity = this.crudMovieEntity.findById(id).orElse(null);
+        if (movieEntity == null) return null;
+        this.movieMapper.updateEntityFromDto(updateMovieDto, movieEntity);
         return this.movieMapper.toDto(this.crudMovieEntity.save(movieEntity));
     }
 }
