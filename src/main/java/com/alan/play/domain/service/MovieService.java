@@ -3,6 +3,7 @@ package com.alan.play.domain.service;
 import com.alan.play.domain.dto.MovieDto;
 import com.alan.play.domain.dto.UpdateMovieDto;
 import com.alan.play.domain.repository.MovieRepository;
+import dev.langchain4j.agent.tool.Tool;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -16,7 +17,7 @@ public class MovieService {
     public MovieService(MovieRepository movieRepository) {
         this.movieRepository = movieRepository;
     }
-
+    @Tool("Busca todas las peliculas que existan dentro de la plataforma")
     public List<MovieDto> getAll() {
         return this.movieRepository.getAll();
     }
@@ -31,5 +32,9 @@ public class MovieService {
 
     public MovieDto update(long id, UpdateMovieDto updateMovieDto) {
         return this.movieRepository.update(id, updateMovieDto);
+    }
+
+    public void delete(long id) {
+        this.movieRepository.delete(id);
     }
 }
