@@ -6,6 +6,7 @@ import com.alan.play.domain.dto.SuggestRequesDto;
 import com.alan.play.domain.dto.UpdateMovieDto;
 import com.alan.play.domain.service.DemoPlayAiService;
 import com.alan.play.domain.service.MovieService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -47,7 +48,7 @@ public class MovieController {
         return ResponseEntity.status(HttpStatus.CREATED).body(movieDtoResponse);
     }
     @PutMapping("/{id}")
-    public ResponseEntity<MovieDto> update(@PathVariable long id, @RequestBody UpdateMovieDto updateMovieDto){
+    public ResponseEntity<MovieDto> update(@PathVariable long id, @RequestBody @Valid UpdateMovieDto updateMovieDto){
         return ResponseEntity.ok(this.movieService.update(id, updateMovieDto));
     }
     @DeleteMapping("/{id}")

@@ -22,6 +22,9 @@ dependencies {
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	developmentOnly 'org.springframework.boot:spring-boot-docker-compose'
 
+	//Validation
+	implementation 'org.springframework.boot:spring-boot-starter-validation'
+
 	// Spring Web
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 
